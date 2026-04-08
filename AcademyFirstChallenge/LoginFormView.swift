@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct LoginFormView: View {
-    @Binding var email: String
-    @Binding var senha: String
-    @Binding var showPassword: Bool
+    @State var email: String = ""
+    @State var senha: String = ""
+    @State var showPassword: Bool = true
     @Binding var isLoggedIn: Bool
     @Binding var showingAlert: Bool
     
@@ -74,7 +74,7 @@ private extension LoginFormView {
             //                        .font(.subheadline)
             //                        .opacity(0)
             Spacer()
-            Image("LogoBorai")
+            Image("boraiLogo")
                 .font(.largeTitle)
                 .foregroundColor(Color.yellow)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -82,7 +82,7 @@ private extension LoginFormView {
             
             //Spacer()
             
-            Image("BandeiraIdioma")
+            Image("bandeiraIdioma")
                 .font(.subheadline)
             //                    .frame(alignment: .trailing)
         }
@@ -231,5 +231,5 @@ struct LoginButtons: View {
 }
 
 #Preview {
-    LoginFormView(email: .constant(""), senha: .constant(""), showPassword: .constant(true), isLoggedIn: .constant(false), showingAlert: .constant(false))
+    LoginFormView(isLoggedIn: .constant(false), showingAlert: .constant(false))
 }

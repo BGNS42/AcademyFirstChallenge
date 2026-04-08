@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct Login: View {
-    @State var email: String = ""
-    @State var senha: String = ""
-    @State var showPassword: Bool = true
     @State private var isLoggedIn: Bool = false
     @State private var showingAlert: Bool = false
     
@@ -20,12 +17,7 @@ struct Login: View {
                 if isLoggedIn {
                     ContentView()
                 } else {
-                    LoginFormView(email: $email,
-                                  senha: $senha,
-                                  showPassword: $showPassword,
-                                  isLoggedIn: $isLoggedIn,
-                                  showingAlert: $showingAlert
-                    )
+                    LoginFormView(isLoggedIn: $isLoggedIn, showingAlert: $showingAlert)
                 }
             }
         }
