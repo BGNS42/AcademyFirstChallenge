@@ -9,7 +9,19 @@ import SwiftUI
 
 struct HomePage: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Bem vindo a HOME PAGE")
+            
+            NavigationLink(destination: BuscarPassagem(), label: {
+                Text("Comprar Passagem")
+                    .foregroundColor(Color.white)
+                    .padding(10)
+                    .background{
+                        RoundedRectangle(cornerRadius: 30)
+                            .fill(Color("azulEscuro"))
+                    }
+            })
+        }
     }
 }
 

@@ -14,13 +14,25 @@ let gradientColors: [Color] = [
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, Academy!")
+        TabView {
+            HomePage()
+                .tabItem{Label("HOME", systemImage: "house")}
+            MeusVoos()
+                .tabItem{
+                    Label {
+                        Text("Meus Voos")
+                    } icon: {
+                        Image(systemName: "airplane")
+                        //Tentar rotacionar esse ícone
+                    }
+                }
+            Profile()
+                .tabItem{Label("Perfil", systemImage: "person")}
         }
-        .padding()
+        
+//        .background(Gradient(colors: gradientColors))
+        .tabViewStyle(.tabBarOnly)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

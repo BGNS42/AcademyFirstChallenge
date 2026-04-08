@@ -18,7 +18,7 @@ struct Login: View {
         NavigationStack{
             VStack{
                 if isLoggedIn {
-                    HomePage()
+                    ContentView()
                 } else {
                     LoginFormView(email: $email,
                                   senha: $senha,
