@@ -1,0 +1,235 @@
+//
+//  LoginFormView.swift
+//  AcademyFirstChallenge
+//
+//  Created by IGOR TEIXEIRA CARRASCO on 08/04/26.
+//
+
+import SwiftUI
+
+struct LoginFormView: View {
+    @Binding var email: String
+    @Binding var senha: String
+    @Binding var showPassword: Bool
+    @Binding var isLoggedIn: Bool
+    @Binding var showingAlert: Bool
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            headerSection
+            
+            VStack(alignment: .leading){
+                Text("Faça o login")
+                    .padding(.bottom, 30)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity)
+                    .font(.title)
+                
+                // USERNAME FIELD
+                emailField
+                
+                // PASSWORD FIELD
+                passwordField
+                
+                // ESQUECI MINHA SENHA
+                forgetPasswordButton
+                
+                LoginButtons(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro") {
+                    print("Tentando logar...")
+                    if senha == "" && email == "" {
+                        isLoggedIn = true
+                        print("Logado com sucesso!")
+                    } else {
+                        print("Dados incorretos")
+                        showingAlert = true
+                    }
+                }
+                .alert("Dados Inválidos", isPresented: $showingAlert) {
+                    Button("Ok", role: .cancel) {}
+                } message: {
+                    Text("Dados de login inválidos, tente não preencher nada e tentar novamente.")
+                }
+                
+                socialButtons
+                
+            }
+            .padding(30)
+            .padding(.bottom, 20)
+            .background{
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(.white)
+            }
+            
+            Spacer()
+        }
+        .padding()
+        .background(Gradient(colors:gradientColors))
+    }
+}
+
+private extension LoginFormView {
+    var headerSection: some View {
+        HStack(alignment: .center) {
+            //                    Image("BandeiraIdioma")
+            //                        .font(.subheadline)
+            //                        .opacity(0)
+            Spacer()
+            Image("LogoBorai")
+                .font(.largeTitle)
+                .foregroundColor(Color.yellow)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.trailing, -40)
+            
+            //Spacer()
+            
+            Image("BandeiraIdioma")
+                .font(.subheadline)
+            //                    .frame(alignment: .trailing)
+        }
+    }
+    
+    var emailField: some View {
+        VStack(alignment: .leading) {
+            Text("E-mail")
+                .padding(.horizontal, 10)
+                .fontWeight(.bold)
+            
+            TextField("Username",
+                      text: $email,
+                      prompt: Text(verbatim: "ex: seu@email.com.br").foregroundColor(.gray)
+            )
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
+            .padding(10)
+            .overlay{
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(.gray, lineWidth: 1)
+                    .shadow(color: Color.black.opacity(0.5), radius: 3, x: -1, y: 3)
+            }
+        }
+        .padding(.bottom, 10)
+    }
+    
+    var passwordField: some View {
+        VStack(alignment: .leading) {
+            Text("Senha")
+                .padding(.horizontal, 10)
+                .fontWeight(.bold)
+            
+            HStack{
+                if showPassword {
+                    SecureField("Password",
+                                text: $senha,
+                                prompt: Text("********").foregroundColor(.gray))
+                } else {
+                    TextField("Password",
+                              text: $senha,
+                              prompt: Text("Sua Senha").foregroundColor(.red))
+                }
+                Button{
+                    showPassword.toggle()
+                } label: {
+                    Image(systemName: showPassword ? "eye.slash.fill" : "eye").foregroundColor(.black)
+                }
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+            }
+            .padding(10)
+            .overlay{
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(.gray, lineWidth: 1)
+                    .shadow(color: Color.black.opacity(0.5), radius: 3, x: -1, y: 3)
+            }
+        }
+    }
+    
+    var forgetPasswordButton: some View {
+        Text("Esqueci minha senha")
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding(.bottom, 30)
+    }
+    
+    var socialButtons: some View {
+        Group{
+            Text("Ou")
+                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .fontWeight(.semibold)
+            
+            LoginButtons(textBtn: "Continuar com a Apple", txtColor: "offWhite", btnColor: "appleBlack") {
+                print("Tentando logar...")
+                if senha == "" && email == "" {
+                    isLoggedIn = true
+                    print("Logado com sucesso!")
+                } else {
+                    print("Dados incorretos")
+                    showingAlert = true
+                }
+                print("logou com a Apple")
+            }
+            
+            LoginButtons(textBtn: "Continuar com o Google", txtColor: "azulEscuro", btnColor: "googleWhite") {
+                print("Tentando logar...")
+                if senha == "" && email == "" {
+                    isLoggedIn = true
+                    print("Logado com sucesso!")
+                } else {
+                    print("Dados incorretos")
+                    showingAlert = true
+                }
+                print("Logou com o Google")
+            }
+            Text("Não tem uma conta? **Cadastre-se**")
+                .underline()
+                .font(.caption)
+                .frame(maxWidth: .infinity)
+        }
+    }
+}
+
+struct LoginButtons: View {
+    let textBtn: String
+    let txtColor: String
+    let btnColor: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: {
+            action()
+        }) {
+            HStack(alignment: .center){
+                if textBtn == "Continuar com a Apple" {
+                    Image("logoApple")
+                    //.resizable()
+                    //.scaledToFit()
+                        .frame(width: 15, height: 15)
+                    //.padding(.trailing, -3)
+                }
+                if textBtn == "Continuar com o Google" {
+                    Image("logoGoogle")
+                    //.resizable()
+                    //.scaledToFit()
+                        .frame(width: 20, height: 20)
+                    //.padding(.trailing, -5)
+                }
+                Text(textBtn)
+            }
+            .padding(5)
+            .fontWeight(.semibold)
+            .foregroundColor(Color(txtColor))
+            .frame(width: 310)
+            .background{
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(Color(btnColor))
+            }
+        }
+        .padding(.bottom, 5)
+        .shadow(color: Color.black.opacity(0.15), radius: 1, x: -2, y: 2)
+    }
+}
+
+#Preview {
+    LoginFormView(email: .constant(""), senha: .constant(""), showPassword: .constant(true), isLoggedIn: .constant(false), showingAlert: .constant(false))
+}
