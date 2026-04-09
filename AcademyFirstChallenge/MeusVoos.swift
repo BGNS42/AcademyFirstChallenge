@@ -65,7 +65,7 @@ struct MeusVoos: View {
                 }
             }
             .padding(.horizontal)
-            .padding(.top, -60)
+            .padding(.top, -40)
         }
         
         .frame(height: 140)
@@ -103,6 +103,7 @@ struct MeusVoos: View {
                             .font(.custom("Poppins-Regular", size: 12))
                             .foregroundColor(.gray)
                     }
+                    .padding(.horizontal, 7)
                     
                     Spacer()
                     
@@ -115,6 +116,8 @@ struct MeusVoos: View {
                             .font(.custom("Poppins-Medium", size: 12))
                     }
                     .frame(maxWidth: .infinity)
+
+                    
                     
                     Spacer()
                     
@@ -128,6 +131,8 @@ struct MeusVoos: View {
                     }
                 }
                 .padding()
+                .padding(.horizontal, -16)
+
                 
                 
                 HStack {
@@ -137,7 +142,7 @@ struct MeusVoos: View {
                 
                 HStack {
                     infoBox(title: "Passageiros                         ", value: "2")
-                    infoBox(title: "Chegada", value: "Abr 27         |        11:50")
+                    infoBox(title: "Chegada", value: "Abr 27        |        11:50")
                 }
                 
                 
