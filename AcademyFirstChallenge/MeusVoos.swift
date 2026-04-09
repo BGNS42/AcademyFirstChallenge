@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MeusVoos: View {
+    @State private var mostrarNotificacao = false
     var body: some View {
         ZStack {
             LinearGradient (colors: [Color("gradientTop"), Color("gradientBottom")], startPoint: .top, endPoint: .bottom)
@@ -19,6 +20,10 @@ struct MeusVoos: View {
                ticketCard
                 Spacer()
                 
+            }
+            if mostrarNotificacao {
+                notificacaoView
+                    .transition(.scale)
             }
         }
        
@@ -40,6 +45,8 @@ struct MeusVoos: View {
                 Spacer()
                 
                 VStack(spacing: 4) {
+                  
+                    
                     Image(systemName: "airplane")
                         .foregroundStyle(Color.white)
                     
@@ -48,10 +55,14 @@ struct MeusVoos: View {
                         .foregroundStyle(Color.white)
                 }
                 Spacer()
-                
-                Image(systemName: "bell.fill")
-                    .foregroundColor(.white)
-            
+                Button {
+                    withAnimation {
+                        mostrarNotificacao.toggle()
+                    }
+                } label: {
+                    Image(systemName: "bell.fill")
+                        .foregroundColor(.white)
+                }
             }
             .padding(.horizontal)
             .padding(.top, -60)
@@ -130,10 +141,21 @@ struct MeusVoos: View {
                 }
                 
                 
-                Rectangle()
-                    .frame(height: 1)
-                    .foregroundColor(Color.gray.opacity(0.3))
-                    .padding(.vertical, 8)
+                GeometryReader { geo in
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: 0))
+                        path.addLine(to: CGPoint(x: geo.size.width, y: 0))
+                    }
+                    .stroke(
+                        Color.gray.opacity(0.7),
+                        style: StrokeStyle(
+                            lineWidth: 1,
+                            dash: [6, 4]
+                        )
+                    )
+                }
+                .frame(height: 1)
+                .padding(.vertical, 8)
                 
                 
                 HStack {
@@ -221,6 +243,36 @@ struct MeusVoos: View {
             return path
             
             
+        }
+    }
+    
+    var notificacaoView: some View {
+        ZStack {
+            Color.black.opacity(0.3)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    withAnimation {
+                        mostrarNotificacao = false
+                    }
+                }
+            VStack(spacing: 12) {
+                Image("caixaCorreio")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 60)
+                Text("Você não tem notificações!")
+                    .font(.custom("Poppins-SemiBold", size: 16))
+                Text("Por enquanto, não temos notificações para mostrar...")
+                    .font(.custom("Poppins-Regular", size: 12))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                
+            }
+            .padding()
+            .frame(maxWidth: 300, maxHeight: 600, alignment: .center)
+            .background(Color.white)
+            .cornerRadius(20)
+            .shadow(radius: 10)
         }
     }
     
