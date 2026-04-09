@@ -12,9 +12,11 @@ struct HomePage: View {
         VStack {
             headerSection
             
-            serviceOptions
+            servicesOptions
             
+            carrosselPromo
         }
+        .background(Color("offWhite"))
     }
 }
 
@@ -31,6 +33,30 @@ private extension HomePage {
                 )
             
             VStack{
+                HStack(alignment: .center){
+                    Spacer()
+                    Image(systemName: "bell.fill")
+                        .frame(alignment: .trailing)
+                        .opacity(0)
+                    
+                    Spacer()
+                    
+                    Text("Bem-vindo(a), *****")
+                        //.font(.subheadline)
+                        .foregroundColor(Color("offWhite"))
+                    
+                    Spacer()
+                    
+                    Image(systemName: "bell.fill")
+                        .frame(alignment: .trailing)
+                        .foregroundColor(Color("offWhite"))
+                    
+                    Spacer()
+                        
+                }
+                .padding()
+                .padding(.bottom, 30)
+                
                 Text("Aqui você encontra as\nmelhores ofertas para viajar")
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 30)
@@ -39,55 +65,150 @@ private extension HomePage {
                     .font(.title3)
                 
                 NavigationLink(destination: BuscarPassagem(), label: {
-                    Text("Comprar Passagem")
+                    Text("COMPRAR PASSAGENS")
                         .foregroundColor(Color.white)
-                        .padding(10)
+                        .padding()
                         .background{
                             RoundedRectangle(cornerRadius: 30)
                                 .fill(Color("btnVermelho"))
                         }
+                        .shadow(color: Color.black.opacity(0.3), radius: 10, x: -3, y: 8)
                 })
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea()
-        .padding(.bottom, 30)
+        //.padding(.bottom)
     }
     
-    var serviceOptions: some View {
+    var servicesOptions: some View {
         VStack{
             Text("O que você está procurando?")
+                .font(.subheadline)
             
             HStack{
                 VStack{
-                    Image(systemName: "airplane")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(
-                            Color("btnLaranja"),
-                            in: Circle(),
-                        )
-                    
+                    NavigationLink(destination: BuscarPassagem(), label: {
+                        Image(systemName: "airplane")
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(
+                                Color("btnLaranja"),
+                                in: Circle(),
+                            )
+                        
+                    })
                     Text("Passagens")
+                        .font(.caption)
                 }
+                .frame(maxWidth: .infinity)
+                btnRedondo(btnColor: "btnVerde", btnLabel: "Hospedagem", btnIcon: "bed.double.fill")
+                btnRedondo(btnColor: "btnAzul", btnLabel: "Pacotes", btnIcon: "briefcase.fill")
+                btnRedondo(btnColor: "btnVermelho", btnLabel: "Ofertas", btnIcon: "flame")
             }
         }
+        .padding()
+    }
+    
+    var carrosselPromo: some View {
+        VStack(alignment: .leading, spacing: 10){
+            Text("Vale a pena conhecer! Promoções imperdíveis")
+                .padding(.horizontal)
+                .foregroundColor(Color("cinzaClaro"))
+                .fontWeight(.bold)
+                .font(.subheadline)
+            
+            ScrollView(.horizontal, showsIndicators: false){
+                LazyHStack(spacing: 15){
+                    promoCard(cardTur: "Jardim Botânico", cardDest: "Curitiba", cardData: "27 Nov", cardPreco: "320,00", imgDestino: "destino1")
+                    promoCard(cardTur: "Fernando de Noronha", cardDest: "Pernambuco", cardData: "05 Abr", cardPreco: "400,00", imgDestino: "destino2")
+                    promoCard(cardTur: "Cristo Redentor", cardDest: "Rio de Janeiro", cardData: "10 Fev", cardPreco: "350,00", imgDestino: "destino3")
+                    promoCard(cardTur: "Parque Ibirapuera", cardDest: "São Paulo", cardData: "22 Jun", cardPreco: "410,00", imgDestino: "destino4")
+                }
+            }
+            .scrollTargetLayout()
+            //.scrollTargetBehavior(.paging)
+            //.containerRelativeFrame(.horizontal)
+        }
+        .contentMargins(.horizontal, 20, for: .scrollContent)
+        .scrollTargetBehavior(.viewAligned)
+        //.padding()
     }
 }
 
 struct btnRedondo: View {
+    var btnColor: String
+    var btnLabel: String
+    var btnIcon: String
+    
     var body: some View {
         VStack{
-            Image(systemName: "airplane")
+            Image(systemName: btnIcon)
                 .padding()
                 .foregroundColor(.white)
                 .background(
-                    Color("btnLaranja"),
+                    Color(btnColor),
                     in: Circle(),
                 )
             
-            Text("Passagens")
+            Text(btnLabel)
+                .font(.caption)
         }
+        .frame(maxWidth: .infinity)
+    }
+}
+
+struct promoCard: View {
+    var cardTur: String
+    var cardDest: String
+    var cardData: String
+    var cardPreco: String
+    var imgDestino: String
+    
+    var body: some View {
+        VStack(spacing: 0){
+            Image(imgDestino)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxHeight: 150)
+                .clipped()
+            
+            VStack(alignment: .center, spacing: 8){
+                Text(cardTur)
+                    .font(.caption)
+                    .bold()
+                    .lineLimit(1)
+                
+                HStack{
+                    Image(systemName: "location.circle.fill")
+                        .font(.footnote)
+                    Text(cardDest)
+                        .font(.caption2)
+                        .lineLimit(1)
+                        .layoutPriority(1)
+                    
+                    Spacer(minLength: 5)
+                    
+                    Image(systemName: "calendar")
+                        .font(.footnote)
+                    Text(cardData)
+                        .font(.caption2)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: true, vertical: false) // garante que a data n quebre
+                }
+                
+                Text("R$ \(cardPreco)")
+                    .font(.caption)
+                    .bold()
+                    .padding(.top, 4)
+            }
+            .padding(8)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.white)
+        }
+        .frame(width: 160)
+        .cornerRadius(20)
+        .shadow(radius: 1)
     }
 }
 
