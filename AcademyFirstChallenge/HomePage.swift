@@ -25,7 +25,7 @@ private extension HomePage {
         ZStack{
             Image("headerHome")
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                //.aspectRatio(contentMode: .fit) // Faz quebrar ao dar padding em outros lugares
                 .overlay(Color("azulEscuro")
                     .opacity(0.5)
                     .cornerRadius(40)
@@ -84,7 +84,7 @@ private extension HomePage {
     var servicesOptions: some View {
         VStack{
             Text("O que você está procurando?")
-                .font(.subheadline)
+                .font(.title3)
             
             HStack{
                 VStack{
@@ -99,7 +99,7 @@ private extension HomePage {
                         
                     })
                     Text("Passagens")
-                        .font(.caption)
+                        .font(.footnote)
                 }
                 .frame(maxWidth: .infinity)
                 btnRedondo(btnColor: "btnVerde", btnLabel: "Hospedagem", btnIcon: "bed.double.fill")
@@ -108,6 +108,7 @@ private extension HomePage {
             }
         }
         .padding()
+        .padding(.bottom, 10)
     }
     
     var carrosselPromo: some View {
@@ -115,8 +116,9 @@ private extension HomePage {
             Text("Vale a pena conhecer! Promoções imperdíveis")
                 .padding(.horizontal)
                 .foregroundColor(Color("cinzaClaro"))
-                .fontWeight(.bold)
+                .fontWeight(.semibold)
                 .font(.subheadline)
+                .padding(.leading, 10)
             
             ScrollView(.horizontal, showsIndicators: false){
                 LazyHStack(spacing: 15){
@@ -132,7 +134,6 @@ private extension HomePage {
         }
         .contentMargins(.horizontal, 20, for: .scrollContent)
         .scrollTargetBehavior(.viewAligned)
-        //.padding()
     }
 }
 
@@ -152,7 +153,7 @@ struct btnRedondo: View {
                 )
             
             Text(btnLabel)
-                .font(.caption)
+                .font(.footnote)
         }
         .frame(maxWidth: .infinity)
     }
