@@ -20,10 +20,11 @@ struct LoginFormView: View {
             
             VStack(alignment: .leading){
                 Text("Faça o login")
+                    .font(.custom("Poppins-SemiBold", size: 24))
                     .padding(.bottom, 30)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity)
-                    .font(.title)
+                    //.font(.title)
                 
                 // USERNAME FIELD
                 emailField
@@ -91,12 +92,13 @@ private extension LoginFormView {
     var emailField: some View {
         VStack(alignment: .leading) {
             Text("E-mail")
+                .font(.custom("Poppins-Bold", size: 16.0))
                 .padding(.horizontal, 10)
-                .fontWeight(.bold)
+                //.fontWeight(.bold)
             
             TextField("Username",
                       text: $email,
-                      prompt: Text(verbatim: "ex: seu@email.com.br").foregroundColor(.gray)
+                      prompt: Text(verbatim: "ex: seu@email.com.br").foregroundColor(.gray).font(.custom("Poppins-Regular", size: 14.0))
             )
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
@@ -113,18 +115,19 @@ private extension LoginFormView {
     var passwordField: some View {
         VStack(alignment: .leading) {
             Text("Senha")
+                .font(.custom("Poppins-Bold", size: 16))
                 .padding(.horizontal, 10)
-                .fontWeight(.bold)
+                //.fontWeight(.bold)
             
             HStack{
                 if showPassword {
                     SecureField("Password",
                                 text: $senha,
-                                prompt: Text("********").foregroundColor(.gray))
+                                prompt: Text("********").foregroundColor(.gray)).font(.custom("Poppins-Regular", size: 14.0))
                 } else {
                     TextField("Password",
                               text: $senha,
-                              prompt: Text("Sua Senha").foregroundColor(.red))
+                              prompt: Text("Sua Senha").foregroundColor(.red)).font(.custom("Poppins-Regular", size: 14.0))
                 }
                 Button{
                     showPassword.toggle()
@@ -145,8 +148,9 @@ private extension LoginFormView {
     
     var forgetPasswordButton: some View {
         Text("Esqueci minha senha")
-            .font(.subheadline)
-            .fontWeight(.semibold)
+            .font(.custom("Poppins-SemiBold", size: 14.0))
+            //.font(.subheadline)
+            //.fontWeight(.semibold)
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.bottom, 30)
     }
@@ -154,9 +158,10 @@ private extension LoginFormView {
     var socialButtons: some View {
         Group{
             Text("Ou")
-                .font(.subheadline)
+                .font(.custom("Poppins-SemiBold", size: 14.0))
+                //.font(.subheadline)
                 .frame(maxWidth: .infinity, alignment: .center)
-                .fontWeight(.semibold)
+                //.fontWeight(.semibold)
             
             LoginButtons(textBtn: "Continuar com a Apple", txtColor: "offWhite", btnColor: "appleBlack") {
                 print("Tentando logar...")
@@ -182,8 +187,9 @@ private extension LoginFormView {
                 print("Logou com o Google")
             }
             Text("Não tem uma conta? **Cadastre-se**")
+                .font(.custom("Poppins-Regular", size: 13.0))
                 .underline()
-                .font(.caption)
+                //.font(.caption)
                 .frame(maxWidth: .infinity)
         }
     }
@@ -217,7 +223,8 @@ struct LoginButtons: View {
                 Text(textBtn)
             }
             .padding(5)
-            .fontWeight(.semibold)
+            .font(.custom("Poppins-Medium", size: 16.0))
+            //.fontWeight(.semibold)
             .foregroundColor(Color(txtColor))
             .frame(width: 310)
             .background{

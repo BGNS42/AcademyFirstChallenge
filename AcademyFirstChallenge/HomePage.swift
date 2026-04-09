@@ -43,6 +43,7 @@ private extension HomePage {
                     
                     Text("Bem-vindo(a), *****")
                         //.font(.subheadline)
+                        .font(.custom("Poppins-Medium", size: 15.0))
                         .foregroundColor(Color("offWhite"))
                     
                     Spacer()
@@ -59,14 +60,16 @@ private extension HomePage {
                 
                 Text("Aqui você encontra as\nmelhores ofertas para viajar")
                     .multilineTextAlignment(.center)
+                    .font(.custom("Poppins-Bold", size: 20))
                     .padding(.bottom, 30)
                     .foregroundColor(Color("offWhite"))
-                    .fontWeight(.bold)
-                    .font(.title3)
+                    //.fontWeight(.bold)
+                    //.font(.title3)
                 
                 NavigationLink(destination: BuscarPassagem(), label: {
                     Text("COMPRAR PASSAGENS")
                         .foregroundColor(Color.white)
+                        .font(.custom("Poppins-Regular", size: 15.0))
                         .padding()
                         .background{
                             RoundedRectangle(cornerRadius: 30)
@@ -84,7 +87,8 @@ private extension HomePage {
     var servicesOptions: some View {
         VStack{
             Text("O que você está procurando?")
-                .font(.title3)
+                .font(.custom("Poppins-Medium", size: 17.0))
+                //.font(.title3)
             
             HStack{
                 VStack{
@@ -99,7 +103,8 @@ private extension HomePage {
                         
                     })
                     Text("Passagens")
-                        .font(.footnote)
+                        .font(.custom("Poppins-Regular", size: 12.0))
+                        //.font(.footnote)
                 }
                 .frame(maxWidth: .infinity)
                 btnRedondo(btnColor: "btnVerde", btnLabel: "Hospedagem", btnIcon: "bed.double.fill")
@@ -114,10 +119,11 @@ private extension HomePage {
     var carrosselPromo: some View {
         VStack(alignment: .leading, spacing: 10){
             Text("Vale a pena conhecer! Promoções imperdíveis")
+                .font(.custom("Poppins-SemiBold", size: 14.0))
                 .padding(.horizontal)
                 .foregroundColor(Color("cinzaClaro"))
-                .fontWeight(.semibold)
-                .font(.subheadline)
+                //.fontWeight(.semibold)
+                //.font(.subheadline)
                 .padding(.leading, 10)
             
             ScrollView(.horizontal, showsIndicators: false){
@@ -153,6 +159,7 @@ struct btnRedondo: View {
                 )
             
             Text(btnLabel)
+                .font(.custom("Poppins-Regular", size: 12.0))
                 .font(.footnote)
         }
         .frame(maxWidth: .infinity)
@@ -176,15 +183,17 @@ struct promoCard: View {
             
             VStack(alignment: .center, spacing: 8){
                 Text(cardTur)
-                    .font(.caption)
-                    .bold()
+                    .font(.custom("Poppins-SemiBold", size: 10.0))
+                    //.font(.caption)
+                    //.bold()
                     .lineLimit(1)
                 
                 HStack{
                     Image(systemName: "location.circle.fill")
                         .font(.footnote)
                     Text(cardDest)
-                        .font(.caption2)
+                        .font(.custom("Poppins-Regular", size: 10.0))
+                        //.font(.caption2)
                         .lineLimit(1)
                         .layoutPriority(1)
                     
@@ -193,14 +202,16 @@ struct promoCard: View {
                     Image(systemName: "calendar")
                         .font(.footnote)
                     Text(cardData)
-                        .font(.caption2)
+                        .font(.custom("Poppins-Regular", size: 10.0))
+                        //.font(.caption2)
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false) // garante que a data n quebre
                 }
                 
                 Text("R$ \(cardPreco)")
-                    .font(.caption)
-                    .bold()
+                    .font(.custom("Poppins-SemiBold", size: 12.0))
+                    //.font(.caption)
+                    //.bold()
                     .padding(.top, 4)
             }
             .padding(8)
