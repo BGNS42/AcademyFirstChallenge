@@ -42,6 +42,7 @@ struct MeusVoos: View {
                         .foregroundStyle(Color.white)
                     
                     Text("Seus Voos")
+                        .font(.custom("Poppins-SemiBold", size: 16.0))
                         .foregroundStyle(Color.white)
                 }
                 Spacer()
