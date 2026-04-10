@@ -11,12 +11,9 @@ struct boraiBtn: View {
     let textBtn: String
     let txtColor: String
     let btnColor: String
-    let action: () -> Void
     
     var body: some View {
-        Button(action: {
-            action()
-        }) {
+    
             HStack(alignment: .center){
                 Text(textBtn)
             }
@@ -27,14 +24,14 @@ struct boraiBtn: View {
             .background{
                 RoundedRectangle(cornerRadius: 30)
                     .fill(Color(btnColor))
-            }
+            }   .padding(.bottom, 5)
+            .shadow(color: Color.black.opacity(0.15), radius: 1, x: -2, y: 2)
         }
-        .padding(.bottom, 5)
-        .shadow(color: Color.black.opacity(0.15), radius: 1, x: -2, y: 2)
+     
     }
-}
+
 
 
 #Preview {
-    boraiBtn(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro", action: {print("Clicou!")})
+    boraiBtn(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro",)
 }

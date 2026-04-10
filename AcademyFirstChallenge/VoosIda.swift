@@ -15,7 +15,7 @@ struct VoosIda: View {
                 Text("Escolher Ida")
             })
             
-            boraiBtn(textBtn: "texto", txtColor: "offWhite", btnColor: "azulEscuro", action: {print("clicou")})
+            boraiBtn(textBtn: "texto", txtColor: "offWhite", btnColor: "azulEscuro")
         }
     }
 }
