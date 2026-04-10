@@ -14,6 +14,8 @@ struct VoosIda: View {
             NavigationLink(destination: VoosVolta(), label: {
                 Text("Escolher Ida")
             })
+            
+            boraiBtn(textBtn: "texto", txtColor: "offWhite", btnColor: "azulEscuro", action: {print("clicou")})
         }
     }
 }
