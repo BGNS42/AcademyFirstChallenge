@@ -152,16 +152,18 @@ struct EscolherBagagem: View {
                 .font(.custom("Poppins-Regular", size: 16))
                 .foregroundColor(.gray)
             
-            NavigationLink(destination: InfoPassageiro(), label: {
-                boraiBtn(textBtn: "Escolher Bagagem", txtColor: "offWhite", btnColor: "azulEscuro")})
- 
+            HStack{
+                NavigationLink(destination: InfoPassageiro(), label: {
+                    boraiBtn(textBtn: "Escolher Bagagem", txtColor: "offWhite", btnColor: "azulEscuro")})
+            }
+            .padding(.horizontal)
         }
         .buttonStyle(.plain)
         .padding()
         .frame(width: 340, height: 600, alignment: .top)
         .background(Color.white)
         .cornerRadius(25)
-        .shadow(radius: 10)
+        .shadow(radius: 6)
         .scaleEffect(selecionado == index ? 1 : 0.95)
         .animation(.easeInOut, value: selecionado)
         .onTapGesture {
