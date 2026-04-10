@@ -12,13 +12,11 @@ struct Login: View {
     @State private var showingAlert: Bool = false
     
     var body: some View {
-        NavigationStack{
-            VStack{
-                if isLoggedIn {
-                    ContentView()
-                } else {
-                    LoginFormView(isLoggedIn: $isLoggedIn, showingAlert: $showingAlert)
-                }
+        VStack{
+            if isLoggedIn {
+                ContentView()
+            } else {
+                LoginFormView(isLoggedIn: $isLoggedIn, showingAlert: $showingAlert)
             }
         }
     }
