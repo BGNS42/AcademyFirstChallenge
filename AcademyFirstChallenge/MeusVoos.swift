@@ -197,14 +197,7 @@ struct MeusVoos: View {
                 Button {
                     print("Baixar Ticket")
                 } label: {
-                    Text("Baixar Ticket")
-                        .font(.custom("Poppins-SemiBold", size: 14))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color("gradientTop"))
-                        .cornerRadius(25)
-                        .shadow(color: .black.opacity(0.2), radius: 8)
+                        boraiBtn(textBtn: "Baixar Ticket", txtColor: "offWhite", btnColor: "azulEscuro")
                 }
             }
             .padding()
