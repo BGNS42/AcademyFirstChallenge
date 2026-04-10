@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct VoosIda: View {
+    @State private var vooSelecionado: String? = nil // armazena o voo selecionado
+    
     var body: some View {
         VStack{
             HStack(alignment: .center, spacing: 10){
@@ -47,10 +49,21 @@ struct VoosIda: View {
             .padding(.horizontal, 20)
             
             ScrollView{
-                voosCard()
-                voosCard()
-                voosCard()
-                voosCard()
+                voosCard(companhiaAerea: "GOL", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "CX524", valor: "640,00")
+                    .overlay( // pra tentar deixar selecionável
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(vooSelecionado == "CX524" ? Color("azulEscuro") : Color.clear, lineWidth: 3)
+                    )
+                
+                voosCard(companhiaAerea: "LATAM", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "SQ762", valor: "690,00")
+                
+                voosCard(companhiaAerea: "AZUL", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "QR9866", valor: "750,00")
+
+                voosCard(companhiaAerea: "GOL", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "CX524", valor: "640,00")
+                
+                voosCard(companhiaAerea: "LATAM", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "SQ762", valor: "690,00")
+                
+                voosCard(companhiaAerea: "AZUL", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "QR9866", valor: "750,00")
             }
             
             Text("Escolher Voo de Ida")
@@ -65,9 +78,47 @@ struct VoosIda: View {
     
 }
 
+enum AirlineInfo {
+    case gol, azul, latam
+    
+    init(_ code: String){
+        switch code.uppercased() {
+        case "GOL": self = .gol
+        case "AZUL": self = .azul
+        default: self = .latam
+        }
+    }
+    
+    var fullName: String {
+        switch self {
+        case .gol: return "GOL Linhas Aéreas"
+        case .azul: return "Azul Linhas Aéreas"
+        case .latam: return "LATAM Airlines"
+        }
+    }
+    
+    var logoName: String {
+        switch self {
+        case .gol: return "GolLogo"
+        case .azul: return "AzulLogo"
+        case .latam: return "LatamLogo"
+        }
+    }
+}
+
 struct voosCard: View {
-//    var companhiaAerea: String
-//    var
+    @State var companhiaAerea: String
+    let aeroSaida: String
+    let cidadeSaida: String
+    let aeroChegada: String
+    let cidadeChegada: String
+    let horarioSaida: String
+    let horarioChegada: String
+    let dataSaida: String
+    let dataChegada: String
+    
+    let codigoVoo: String
+    let valor: String
     
     var body: some View {
         ZStack{
@@ -76,7 +127,7 @@ struct voosCard: View {
                 .clipShape(TicketCutoutShape(), style: FillStyle(eoFill: true))
                 .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 10)
             
-            infosDeCima()
+            infosDeCima(codigoCompanhia: companhiaAerea, aeroSaida: aeroSaida,cidadeSaida: cidadeSaida, aeroChegada: aeroChegada, cidadeChegada: cidadeChegada, horarioSaida: horarioSaida, horarioChegada: horarioChegada, dataSaida: dataSaida, dataChegada: dataChegada)
                 .padding()
                 .padding(.bottom, 40)
             
@@ -84,12 +135,13 @@ struct voosCard: View {
                 .padding(.top, 25)
                 .padding(.horizontal, 20)
             
-            infosDeBaixo()
+            infosDeBaixo(codigoVoo: codigoVoo, valor: valor)
                 .padding()
                 .padding(.top, 100)
             
         }
         .frame(width: 375, height: 191)
+        .contentShape(Rectangle()) // pra tentar deixar slecionável
         .padding()
     }
     
@@ -113,21 +165,38 @@ struct voosCard: View {
 }
 
 struct infosDeCima: View {
+    let codigoCompanhia: String
+    
+    let aeroSaida: String
+    let cidadeSaida: String
+    let aeroChegada: String
+    let cidadeChegada: String
+    let horarioSaida: String
+    let horarioChegada: String
+    let dataSaida: String
+    let dataChegada: String
+    
+    private var airline: AirlineInfo {
+        AirlineInfo(codigoCompanhia)
+    }
+    
     var body: some View {
+        
         VStack(spacing: 0) {
             HStack {
-                Text("GOL Linhas Aéreas")
+                Text(airline.fullName)
                     .font(.custom("Poppins-Medium", size: 17, relativeTo: .body))
                 
                 Spacer()
                 
-                Image("GolLogo")
+                Image(airline.logoName)
                     .resizable()
-                    .frame(width: 42, height: 24)
+                    .scaledToFit()
+                    .frame(maxWidth: 68, maxHeight: 21)
             }
             
             HStack {
-                campoTexto()
+                campoTexto(aeroporto: aeroSaida, cidade: cidadeSaida, data: dataSaida, hora: horarioSaida)
                 
                 VStack(spacing: 0) {
                     Image("airplane1")
@@ -137,7 +206,7 @@ struct infosDeCima: View {
                 }
                 .frame(maxWidth: .infinity)
                 
-                campoTexto()
+                campoTexto(aeroporto: aeroChegada, cidade: cidadeChegada, data: dataChegada, hora: horarioChegada)
             }
             .padding(.bottom, 30)
         }
@@ -145,9 +214,12 @@ struct infosDeCima: View {
 }
     
 struct infosDeBaixo: View {
+    let codigoVoo: String
+    let valor: String
+    
         var body: some View {
             HStack{
-                Text("CX524")
+                Text(codigoVoo)
                     .font(.custom("Poppins-Medium", size: 13, relativeTo: .body))
                     .foregroundColor(Color("blackCustom"))
                 
@@ -169,8 +241,8 @@ struct infosDeBaixo: View {
                             .stroke(Color("cinzaClaro"), lineWidth: 0.5)
                     )
                 
-                Text("R$ 690,00")
-                    .font(.custom("Poppins-Medium", size: 13, relativeTo: .body))
+                Text("R$ \(valor)")
+                    .font(.custom("Poppins-Medium", size: 14, relativeTo: .body))
                     .foregroundColor(Color("azulEscuro"))
             }
             .frame(maxWidth: .infinity)
@@ -180,29 +252,34 @@ struct infosDeBaixo: View {
 
 
 struct campoTexto: View {
+    let aeroporto: String
+    let cidade: String
+    let data: String
+    let hora: String
+    
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading, spacing: 2){
             HStack{
-                Text("GRU")
+                Text(aeroporto)
                     .font(.custom("Poppins-SemiBold", size: 16, relativeTo: .body))
                 
                 Spacer()
                 
-                Text("São Paulo")
+                Text(cidade)
                     .font(.custom("Poppins-Regular", size: 12, relativeTo: .body))
                     .foregroundColor(.gray)
                     .lineLimit(1)
             }
             
             HStack{
-                Text("Abr 27")
+                Text(data)
                     .font(.custom("Poppins-Regular", size: 13, relativeTo: .body))
                     .foregroundColor(.gray)
                     .lineLimit(1)
                 
                 Spacer()
                 
-                Text("10:20")
+                Text(hora)
                     .font(.custom("Poppins-Regular", size: 13, relativeTo: .body))
                     .foregroundColor(.gray)
                     .lineLimit(1)
