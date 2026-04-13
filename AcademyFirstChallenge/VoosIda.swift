@@ -10,6 +10,7 @@ import SwiftUI
 struct VoosIda: View {
     @State private var vooSelecionado: String? = nil // armazena o voo selecionado
     @State var aeroBuscaIda: String = "GRU"
+    //@Binding var origin: String
     @State var aeroBuscaVolta: String = "SDU"
     
     var body: some View {
@@ -366,5 +367,6 @@ struct TicketCutoutShape: Shape {
 }
 
 #Preview {
+//    VoosIda(origin: .constant("GRU"))
     VoosIda()
 }
