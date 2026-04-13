@@ -89,7 +89,7 @@ struct EscolherBagagem: View {
                 Spacer()
                 
                 VStack(spacing: 4) {
-                    Image(systemName: "suitcase")
+                    Image(systemName: "suitcase.fill")
                         .foregroundColor(.white)
                     Text("Opções de Bagagem")
                         .font(.custom("Poppins-SemiBold", size: 16.0))
