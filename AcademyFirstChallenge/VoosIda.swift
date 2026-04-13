@@ -9,8 +9,21 @@ import SwiftUI
 
 struct VoosIda: View {
     @State private var vooSelecionado: String? = nil // armazena o voo selecionado
+    @State var aeroBuscaIda: String = "GRU"
+    @State var aeroBuscaVolta: String = "SDU"
     
     var body: some View {
+        VStack{
+            headerSection
+
+            
+            voosScrollView
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Gradient(colors: gradientColors))
+    }
+    
+    var headerSection: some View {
         VStack{
             HStack(alignment: .center, spacing: 10){
                 Image(systemName: "bell.fill")
@@ -19,11 +32,11 @@ struct VoosIda: View {
                 
                 Spacer()
                 
-                Text("GRU") // Fazer ele observar a variável escolhida na tela anterior e mostrar aqui
+                Text(aeroBuscaIda) // Fazer ele observar a variável escolhida na tela anterior e mostrar aqui
                     .font(.custom("Poppins-Medium", size: 16, relativeTo: .body))
                     .foregroundColor(Color("offWhite"))
                 Image("headerPlaneImg")
-                Text("SDU")
+                Text(aeroBuscaVolta)
                     .font(.custom("Poppins-Medium", size: 16, relativeTo: .body))
                     .foregroundColor(Color("offWhite"))
                 
@@ -47,35 +60,42 @@ struct VoosIda: View {
                     .foregroundColor(Color("offWhite"))
             }
             .padding(.horizontal, 20)
-            
-            ScrollView{
-                voosCard(companhiaAerea: "GOL", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "CX524", valor: "640,00")
-                    .overlay( // pra tentar deixar selecionável
-                        RoundedRectangle(cornerRadius: 25)
-                            .stroke(vooSelecionado == "CX524" ? Color("azulEscuro") : Color.clear, lineWidth: 3)
-                    )
-                
-                voosCard(companhiaAerea: "LATAM", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "SQ762", valor: "690,00")
-                
-                voosCard(companhiaAerea: "AZUL", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "QR9866", valor: "750,00")
-
-                voosCard(companhiaAerea: "GOL", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "CX524", valor: "640,00")
-                
-                voosCard(companhiaAerea: "LATAM", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "SQ762", valor: "690,00")
-                
-                voosCard(companhiaAerea: "AZUL", aeroSaida: "GRU",cidadeSaida: "São Paulo", aeroChegada: "SDU", cidadeChegada: "Rio de Janeiro", horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "QR9866", valor: "750,00")
-            }
-            
-            Text("Escolher Voo de Ida")
-            NavigationLink(destination: VoosVolta(), label: {
-                boraiBtn(textBtn: "Proximo", txtColor: "offWhite", btnColor: "azulEscuro")
-            })
-            
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Gradient(colors: gradientColors))
     }
     
+    var voosScrollView: some View {
+        ScrollView{
+            NavigationLink(destination: VoosVolta()) {
+                voosCard(companhiaAerea: "GOL", aeroBuscaIda: $aeroBuscaIda, aeroBuscaVolta: $aeroBuscaVolta, horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "CX524", valor: "640,00")
+            }
+            .buttonStyle(PlainButtonStyle())
+            
+            NavigationLink(destination: VoosVolta()) {
+                voosCard(companhiaAerea: "LATAM", aeroBuscaIda: $aeroBuscaIda, aeroBuscaVolta: $aeroBuscaVolta, horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "SQ762", valor: "690,00")
+            }
+            .buttonStyle(PlainButtonStyle())
+            
+            NavigationLink(destination: VoosVolta()) {
+                voosCard(companhiaAerea: "AZUL", aeroBuscaIda: $aeroBuscaIda, aeroBuscaVolta: $aeroBuscaVolta, horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "QR9866", valor: "750,00")
+            }
+            .buttonStyle(PlainButtonStyle())
+            
+            NavigationLink(destination: VoosVolta()) {
+                voosCard(companhiaAerea: "GOL", aeroBuscaIda: $aeroBuscaIda, aeroBuscaVolta: $aeroBuscaVolta, horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "CX5244", valor: "640,00")
+            }
+            .buttonStyle(PlainButtonStyle())
+            
+            NavigationLink(destination: VoosVolta()) {
+                voosCard(companhiaAerea: "LATAM", aeroBuscaIda: $aeroBuscaIda, aeroBuscaVolta: $aeroBuscaVolta, horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "SQ7624", valor: "690,00")
+            }
+            .buttonStyle(PlainButtonStyle())
+            
+            NavigationLink(destination: VoosVolta()) {
+                voosCard(companhiaAerea: "AZUL", aeroBuscaIda: $aeroBuscaIda, aeroBuscaVolta: $aeroBuscaVolta, horarioSaida: "10:20", horarioChegada: "11:20", dataSaida: "Abr 27", dataChegada: "Abr 27", codigoVoo: "QR9863", valor: "750,00")
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+    }
 }
 
 enum AirlineInfo {
@@ -106,12 +126,39 @@ enum AirlineInfo {
     }
 }
 
+enum DestinationAirport {
+    case gru, sdu, vazio
+    
+    init(_ code: String) {
+        switch code.uppercased() {
+        case "SDU": self = .sdu
+        case "GRU": self = .gru
+        default: self = .vazio
+        }
+    }
+    
+    var sigla: String {
+        switch self {
+        case .sdu: return "SDU"
+        case .gru: return "GRU"
+        case .vazio: return "-"
+        }
+    }
+    
+    var cityName: String {
+        switch self {
+        case .sdu: return "Rio de Janeiro"
+        case .gru: return "São Paulo"
+        case .vazio: return "-"
+        }
+    }
+}
+
 struct voosCard: View {
     @State var companhiaAerea: String
-    let aeroSaida: String
-    let cidadeSaida: String
-    let aeroChegada: String
-    let cidadeChegada: String
+    @Binding var aeroBuscaIda: String
+    @Binding var aeroBuscaVolta: String
+
     let horarioSaida: String
     let horarioChegada: String
     let dataSaida: String
@@ -127,7 +174,7 @@ struct voosCard: View {
                 .clipShape(TicketCutoutShape(), style: FillStyle(eoFill: true))
                 .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 10)
             
-            infosDeCima(codigoCompanhia: companhiaAerea, aeroSaida: aeroSaida,cidadeSaida: cidadeSaida, aeroChegada: aeroChegada, cidadeChegada: cidadeChegada, horarioSaida: horarioSaida, horarioChegada: horarioChegada, dataSaida: dataSaida, dataChegada: dataChegada)
+            infosDeCima(codigoCompanhia: companhiaAerea, codigoAirportIda: aeroBuscaIda, codigoAirportVolta: aeroBuscaVolta, horarioSaida: horarioSaida, horarioChegada: horarioChegada, dataSaida: dataSaida, dataChegada: dataChegada)
                 .padding()
                 .padding(.bottom, 40)
             
@@ -141,7 +188,7 @@ struct voosCard: View {
             
         }
         .frame(width: 375, height: 191)
-        .contentShape(Rectangle()) // pra tentar deixar slecionável
+        //.contentShape(Rectangle()) // pra tentar deixar slecionável
         .padding()
     }
     
@@ -166,11 +213,9 @@ struct voosCard: View {
 
 struct infosDeCima: View {
     let codigoCompanhia: String
+    let codigoAirportIda: String
+    let codigoAirportVolta: String
     
-    let aeroSaida: String
-    let cidadeSaida: String
-    let aeroChegada: String
-    let cidadeChegada: String
     let horarioSaida: String
     let horarioChegada: String
     let dataSaida: String
@@ -178,6 +223,13 @@ struct infosDeCima: View {
     
     private var airline: AirlineInfo {
         AirlineInfo(codigoCompanhia)
+    }
+    
+    private var airportIda: DestinationAirport {
+        DestinationAirport(codigoAirportIda)
+    }
+    private var airportVolta: DestinationAirport {
+        DestinationAirport(codigoAirportVolta)
     }
     
     var body: some View {
@@ -196,7 +248,7 @@ struct infosDeCima: View {
             }
             
             HStack {
-                campoTexto(aeroporto: aeroSaida, cidade: cidadeSaida, data: dataSaida, hora: horarioSaida)
+                campoTexto(aeroporto: airportIda.sigla, cidade: airportIda.cityName, data: dataSaida, hora: horarioSaida)
                 
                 VStack(spacing: 0) {
                     Image("airplane1")
@@ -206,7 +258,7 @@ struct infosDeCima: View {
                 }
                 .frame(maxWidth: .infinity)
                 
-                campoTexto(aeroporto: aeroChegada, cidade: cidadeChegada, data: dataChegada, hora: horarioChegada)
+                campoTexto(aeroporto: airportVolta.sigla, cidade: airportVolta.cityName, data: dataChegada, hora: horarioChegada)
             }
             .padding(.bottom, 30)
         }
