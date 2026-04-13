@@ -20,12 +20,18 @@ struct InfoPassageiro: View {
                     
                     header
                     
+                    ScrollView{
+                        VStack(spacing: 16) {
+                           passageiroCard(titulo: "Passageiro 1", index: 1)
+                        passageiroCard(titulo: "Passageiro 2", index: 2)
+                            
+                            //totalView
+                        }
+                        .padding()
+                    }
+                    
                 }
-                
-                
-                
-                
-                
+     
                 if mostrarNotificacao {
                     notificacaoView
                         .transition(.scale)
@@ -74,6 +80,68 @@ struct InfoPassageiro: View {
             
         }
     } //var header
+    
+    func passageiroCard(titulo: String, index: Int) -> some View {
+        let isOpen = passageiroSelecionado == index
+        
+        return VStack(spacing: 0) {
+            Button {
+                withAnimation {
+                    if passageiroSelecionado == index {
+                        passageiroSelecionado = nil
+                    } else {
+                        passageiroSelecionado = index
+                        
+                    }
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "person.circle.fill")
+                        .font(.system(size: 28))
+                        .foregroundColor(.white)
+                    
+                    Text(titulo)
+                        .font(.custom("Poppins-SemiBold", size: 16))
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .rotationEffect(.degrees(isOpen ? 90 : 0))
+                        .foregroundColor(.white)
+                    
+                }
+                .padding()
+                .background(Color("azulEscuro"))
+            }
+            if isOpen {
+                VStack(spacing: 12) {
+                    campo("Nome Completo", icon: "person")
+                    campo("CPF ou Passaporte", icon: "doc.text")
+                    campo("Data de nascimento", icon: "calendar")
+                    campo("Telefone", icon: "phone")
+                    
+                }
+                .padding()
+                .background(Color.white)
+            }
+        }
+        .cornerRadius(20)
+        .shadow(radius: 5)
+    }
+    
+    func campo(_ placeholder: String, icon: String) -> some View{
+        HStack{
+            Image(systemName: icon)
+                .foregroundColor(.gray)
+            TextField(placeholder, text: .constant(""))
+                .font(.custom("Poppins-Regular", size: 14))
+        }
+        .padding()
+        .background(Color.gray.opacity(0.01))
+        .cornerRadius(10)
+    }
+    
+    
     var notificacaoView: some View {
         ZStack {
             Color.black.opacity(0.3)
