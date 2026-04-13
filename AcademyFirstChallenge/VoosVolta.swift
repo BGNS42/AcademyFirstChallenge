@@ -48,7 +48,7 @@ struct VoosVolta: View {
             .padding()
             
             HStack(alignment: .center, spacing: 10){
-                Text("Voos de ida")
+                Text("Voos de volta")
                     .font(.custom("Poppins-Medium", size: 14, relativeTo: .body))
                     .foregroundColor(Color("offWhite"))
                 
