@@ -13,24 +13,26 @@ struct boraiBtn: View {
     let btnColor: String
     
     var body: some View {
-        HStack(alignment: .center){
-            Text(textBtn)
+    
+            HStack(alignment: .center){
+                Text(textBtn)
+            }
+            .padding(15)
+            .font(.custom("Poppins-Medium", size: 18))
+            .foregroundColor(Color(txtColor))
+            .frame(width: 264)
+            .background{
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(Color(btnColor))
+            }   .padding(.bottom, 5)
+            .shadow(color: Color.black.opacity(0.15), radius: 1, x: -2, y: 2)
         }
-        .padding(15)
-        .font(.custom("Poppins-Medium", size: 18))
-        .foregroundColor(Color(txtColor))
-        .frame(width: 264)
-        .background{
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color(btnColor))
-        }
-        .padding(.bottom, 5)
-        .shadow(color: Color.black.opacity(0.15), radius: 1, x: -2, y: 2)
+     
     }
-}
+
 
 
 
 #Preview {
-    boraiBtn(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro")
+    boraiBtn(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro",)
 }
