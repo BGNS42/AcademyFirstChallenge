@@ -96,7 +96,7 @@ struct InfoPassageiro: View {
                     }
                 }
                 .padding(.horizontal)
-                .padding(.top, -40)
+                .padding(.top, -50)
                 
                 
             }
