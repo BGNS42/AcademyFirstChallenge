@@ -11,7 +11,7 @@ import SwiftUI
 struct AcademyFirstChallengeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Login()
         }
     }
 }

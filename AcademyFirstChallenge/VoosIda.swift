@@ -16,7 +16,6 @@ struct VoosIda: View {
     var body: some View {
         VStack{
             headerSection
-
             
             voosScrollView
         }
@@ -62,6 +61,8 @@ struct VoosIda: View {
             }
             .padding(.horizontal, 20)
         }
+        .padding(.horizontal)
+        .padding(.top, -60)  // PADDING PRA POSICIONAR HEADER NA MESMA LINHA DO BOTAO DE VOLTAR
     }
     
     var voosScrollView: some View {

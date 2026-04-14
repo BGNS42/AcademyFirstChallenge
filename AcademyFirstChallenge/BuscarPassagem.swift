@@ -25,13 +25,15 @@ struct BuscarPassagem: View {
             
             headerSection(pageTitle: "Comprar Passagem", pageIcon: "buyTicketImg")
             
+            Spacer()
+            
             formBuscaVoo
             
             VStack{
-                Text("Escolha seu destino")
-                NavigationLink(destination: VoosIda(), label: {
-                    Text("Buscar Passagem")
-                })
+                //Text("Escolha seu destino")
+//                NavigationLink(destination: VoosIda(), label: {
+//                    boraiBtn(textBtn: <#T##String#>, txtColor: <#T##String#>, btnColor: <#T##String#>)
+//                })
             }
             Spacer()
         }
@@ -154,7 +156,7 @@ struct BuscarPassagem: View {
             }
             
             Section{ // PASSAGEIROS E ASSENTO ECONOMICO
-                HStack{
+                HStack(spacing: 20){
                     VStack(alignment: .leading, spacing: 10){
                         Text("Passageiros")
                             .font(.custom("Poppins-Regular", size: 15, relativeTo: .body))
@@ -171,7 +173,7 @@ struct BuscarPassagem: View {
                             }
                         }
                         .padding(.horizontal, 5)
-                        .padding(.vertical)
+                        .padding(.vertical, 15)
                         .overlay{
                             RoundedRectangle(cornerRadius: 15)
                                 .stroke(.gray, lineWidth: 1)
@@ -185,9 +187,6 @@ struct BuscarPassagem: View {
                             .foregroundColor(Color("blackCustom"))
                         
                         HStack{
-//                            Image(systemName: "person.fill")
-//                                .foregroundColor(Color("blackCustom"))
-                            
                             Menu{
                                 ForEach(assentosOptions, id: \.self) { assento in
                                     Button(assento) {
@@ -199,7 +198,7 @@ struct BuscarPassagem: View {
                                     Image(systemName: "sofa")
                                         .foregroundColor(Color("blackCustom"))
                                     
-                                    Text(tripType.isEmpty ? "Econômica" : tripType)
+                                    Text(tripType.isEmpty ? "Escolha" : tripType)
                                         .font(.custom("Poppins-Regular", size: 16, relativeTo: .body))
                                         .foregroundColor(tripType.isEmpty ? Color("cinzaClaro") : Color("blackCustom"))
                                     
@@ -211,7 +210,7 @@ struct BuscarPassagem: View {
                             }
                         }
                         .padding(.horizontal, 5)
-                        .padding(.vertical)
+                        .padding(.vertical, 20)
                         .overlay{
                             RoundedRectangle(cornerRadius: 15)
                                 .stroke(.gray, lineWidth: 1)
@@ -219,6 +218,13 @@ struct BuscarPassagem: View {
                         .padding(.bottom, 20)
                     }
                 }
+            }
+            HStack(alignment: .center){
+                Spacer()
+                NavigationLink(destination: VoosIda(), label: {
+                    boraiBtn(textBtn: "Buscar Voo", txtColor: "offWhite", btnColor: "azulEscuro")
+                })
+                Spacer()
             }
         }
         .padding()
@@ -261,6 +267,8 @@ struct headerSection: View {
             }
             .padding()
         }
+        .padding(.horizontal)
+        .padding(.top, -70) // PADDING PRA POSICIONAR HEADER NA MESMA LINHA DO BOTAO DE VOLTAR
     }
 }
 
