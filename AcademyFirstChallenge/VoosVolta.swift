@@ -15,8 +15,7 @@ struct VoosVolta: View {
     var body: some View {
         VStack{
             headerSection
-            
-            
+
             voosScrollView
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -27,7 +26,8 @@ struct VoosVolta: View {
         VStack{
             HStack(alignment: .center, spacing: 10){
                 Image(systemName: "bell.fill")
-                    .foregroundColor(Color("offWhite"))
+                    .foregroundStyle(Color.offWhite)
+                    .font(.title3)
                     .opacity(0)
                 
                 Spacer()
@@ -43,7 +43,8 @@ struct VoosVolta: View {
                 Spacer()
                 
                 Image(systemName: "bell.fill")
-                    .foregroundColor(Color("offWhite"))
+                    .foregroundStyle(Color.offWhite)
+                    .font(.title3)
             }
             .padding()
             
@@ -61,6 +62,8 @@ struct VoosVolta: View {
             }
             .padding(.horizontal, 20)
         }
+        .padding(.horizontal)
+        .padding(.top, -60)  // PADDING PRA POSICIONAR HEADER NA MESMA LINHA DO BOTAO DE VOLTAR
     }
     
     var voosScrollView: some View {
