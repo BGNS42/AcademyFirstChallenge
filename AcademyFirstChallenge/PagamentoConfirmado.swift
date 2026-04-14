@@ -12,16 +12,11 @@ struct PagamentoConfirmado: View {
     
     var body: some View {
         VStack{
-            NavigationStack{
-                VStack{
-                    if isConcluded {
-                        ContentView()
-                    } else {
-                        finale
-                    }
-                }
+            if isConcluded {
+                HomePageNav()
+            } else {
+                finale
             }
-            .navigationBarBackButtonHidden(true)
         }
     }
     

@@ -32,6 +32,7 @@ struct boraiBtn: View {
 
 
 
+
 #Preview {
     boraiBtn(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro",)
 }

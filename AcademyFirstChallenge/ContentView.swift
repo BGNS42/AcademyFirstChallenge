@@ -15,7 +15,7 @@ let gradientColors: [Color] = [
 struct ContentView: View {
     var body: some View {
         TabView {
-            HomePage()
+            HomePageNav()
                 .tabItem{Label("HOME", systemImage: "house")}
             MeusVoos()
                 .tabItem{
