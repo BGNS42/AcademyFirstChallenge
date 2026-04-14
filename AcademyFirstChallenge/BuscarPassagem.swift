@@ -297,61 +297,6 @@ struct BuscarPassagem: View {
     }
 }
 
-
-struct headerSection: View {
-    var pageTitle: String = "Page Title"
-    var pageIcon: String
-    
-    var body: some View {
-        VStack{
-            HStack(alignment: .center, spacing: 10){
-                Image(systemName: "bell.fill")
-                    .foregroundStyle(Color.offWhite)
-                    .font(.title3)
-                    .opacity(0)
-                
-                Spacer()
-                
-                VStack {
-                    Image(pageIcon)
-                    
-                    Text(pageTitle)
-                        .font(.custom("Poppins-Medium", size: 16, relativeTo: .body))
-                        .foregroundStyle(Color.offWhite)
-                }
-                
-                Spacer()
-                
-                Image(systemName: "bell.fill")
-                    .foregroundStyle(Color.offWhite)
-                    .font(.title3)
-            }
-            .padding()
-        }
-        .padding(.horizontal)
-        .padding(.top, -70) // PADDING PRA POSICIONAR HEADER NA MESMA LINHA DO BOTAO DE VOLTAR
-    }
-}
-
-struct hashtagDesconto: View {
-    var hashtag: String = "#PRIMEIROVOO"
-    var corBack: Color = .azulEscuro
-    var corTxt: Color = .white
-    
-    
-    var body: some View {
-        Text(hashtag)
-            .font(.custom("Poppins-Regular", size: 12, relativeTo: .body))
-            .foregroundStyle(corTxt)
-            .padding(.vertical, 5)
-            .padding(.horizontal, 10)
-            .background(
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(corBack)
-            )
-    }
-}
-
 #Preview {
     BuscarPassagem()
 }

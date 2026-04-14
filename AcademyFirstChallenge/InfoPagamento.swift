@@ -11,7 +11,7 @@ struct InfoPagamento: View {
     var body: some View {
         VStack{
             Text("Coloque as informações de Pagamento")
-            NavigationLink(destination: PagamentoConfirmado(), label: {
+            NavigationLink(destination: ResumoDoPedido(), label: {
                 Text("Confirmar dados de pagamento")
             })
         }

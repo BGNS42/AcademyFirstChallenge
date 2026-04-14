@@ -107,9 +107,9 @@ private extension HomePage {
                         //.font(.footnote)
                 }
                 .frame(maxWidth: .infinity)
-                btnRedondo(btnColor: "btnVerde", btnLabel: "Hospedagem", btnIcon: "bed.double.fill")
-                btnRedondo(btnColor: "btnAzul", btnLabel: "Pacotes", btnIcon: "briefcase.fill")
-                btnRedondo(btnColor: "btnVermelho", btnLabel: "Ofertas", btnIcon: "flame")
+                btnRedondo(btnColor: .btnVerde, btnLabel: "Hospedagem", btnIcon: "bed.double.fill")
+                btnRedondo(btnColor: .btnAzul, btnLabel: "Pacotes", btnIcon: "briefcase.fill")
+                btnRedondo(btnColor: .btnVermelho, btnLabel: "Ofertas", btnIcon: "flame")
             }
         }
         .padding()
@@ -143,28 +143,28 @@ private extension HomePage {
     }
 }
 
-struct btnRedondo: View {
-    var btnColor: String
-    var btnLabel: String
-    var btnIcon: String
-    
-    var body: some View {
-        VStack{
-            Image(systemName: btnIcon)
-                .padding()
-                .foregroundColor(.white)
-                .background(
-                    Color(btnColor),
-                    in: Circle(),
-                )
-            
-            Text(btnLabel)
-                .font(.custom("Poppins-Regular", size: 12.0))
-                .font(.footnote)
-        }
-        .frame(maxWidth: .infinity)
-    }
-}
+//struct btnRedondo: View {
+//    var btnColor: String
+//    var btnLabel: String
+//    var btnIcon: String
+//    
+//    var body: some View {
+//        VStack{
+//            Image(systemName: btnIcon)
+//                .padding()
+//                .foregroundColor(.white)
+//                .background(
+//                    Color(btnColor),
+//                    in: Circle(),
+//                )
+//            
+//            Text(btnLabel)
+//                .font(.custom("Poppins-Regular", size: 12.0))
+//                .font(.footnote)
+//        }
+//        .frame(maxWidth: .infinity)
+//    }
+//}
 
 struct promoCard: View {
     var cardTur: String
