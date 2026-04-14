@@ -12,6 +12,7 @@ struct VoosIda: View {
     @State var aeroBuscaIda: String = "GRU"
     //@Binding var origin: String
     @State var aeroBuscaVolta: String = "SDU"
+    //@State var destino: String
     
     var body: some View {
         VStack{
@@ -27,7 +28,8 @@ struct VoosIda: View {
         VStack{
             HStack(alignment: .center, spacing: 10){
                 Image(systemName: "bell.fill")
-                    .foregroundColor(Color("offWhite"))
+                    .foregroundStyle(Color.offWhite)
+                    .font(.title3)
                     .opacity(0)
                 
                 Spacer()
@@ -43,7 +45,8 @@ struct VoosIda: View {
                 Spacer()
                 
                 Image(systemName: "bell.fill")
-                    .foregroundColor(Color("offWhite"))
+                    .foregroundStyle(Color.offWhite)
+                    .font(.title3)
             }
             .padding()
             
@@ -180,7 +183,7 @@ struct voosCard: View {
                 .padding()
                 .padding(.bottom, 40)
             
-            linhaPontilhada
+            linhaPontilhada()
                 .padding(.top, 25)
                 .padding(.horizontal, 20)
             
@@ -194,23 +197,23 @@ struct voosCard: View {
         .padding()
     }
     
-    var linhaPontilhada: some View {
-        GeometryReader { geo in
-            Path { path in
-                path.move(to: CGPoint(x: 0, y: 0))
-                path.addLine(to: CGPoint(x: geo.size.width, y: 0))
-            }
-            .stroke(
-                Color.gray.opacity(0.7),
-                style: StrokeStyle(
-                    lineWidth: 1,
-                    dash: [6, 4]
-                )
-            )
-        }
-        .frame(height: 1)
-        .padding(.vertical, 8)
-    }
+//    var linhaPontilhada: some View {
+//        GeometryReader { geo in
+//            Path { path in
+//                path.move(to: CGPoint(x: 0, y: 0))
+//                path.addLine(to: CGPoint(x: geo.size.width, y: 0))
+//            }
+//            .stroke(
+//                Color.gray.opacity(0.7),
+//                style: StrokeStyle(
+//                    lineWidth: 1,
+//                    dash: [6, 4]
+//                )
+//            )
+//        }
+//        .frame(height: 1)
+//        .padding(.vertical, 8)
+//    }
 }
 
 struct infosDeCima: View {
@@ -364,6 +367,30 @@ struct TicketCutoutShape: Shape {
         return path
         
         
+    }
+}
+
+struct linhaPontilhada: View {
+    var cor: Color = .gray.opacity(0.7)
+    var larguraLinha: CGFloat = 1
+    var tracejado: [CGFloat] = [6, 4]
+    
+    var body: some View {
+        GeometryReader { geo in
+            Path { path in
+                path.move(to: CGPoint(x: 0, y: 0))
+                path.addLine(to: CGPoint(x: geo.size.width, y: 0))
+            }
+            .stroke(
+                cor,
+                style: StrokeStyle(
+                    lineWidth: larguraLinha,
+                    dash: tracejado
+                )
+            )
+        }
+        .frame(height: 1)
+        .padding(.vertical, 8)
     }
 }
 

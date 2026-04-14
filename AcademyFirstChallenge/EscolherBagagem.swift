@@ -106,7 +106,7 @@ struct EscolherBagagem: View {
                 }
             }
             .padding(.horizontal)
-            .padding(.top, -40)
+            .padding(.top, -60)
             }
         } //var header
     
