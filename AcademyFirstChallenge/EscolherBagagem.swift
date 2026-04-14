@@ -154,7 +154,7 @@ struct EscolherBagagem: View {
             
             HStack{
                 NavigationLink(destination: InfoPassageiro(), label: {
-                    boraiBtn(textBtn: "Escolher Bagagem", txtColor: "offWhite", btnColor: "azulEscuro")})
+                    boraiBtn(textBtn: "Escolher Bagagem", txtColor: .offWhite, btnColor: .azulEscuro)})
             }
             .padding(.horizontal)
         }

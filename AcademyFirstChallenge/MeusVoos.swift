@@ -197,7 +197,7 @@ struct MeusVoos: View {
                 Button {
                     print("Baixar Ticket")
                 } label: {
-                        boraiBtn(textBtn: "Baixar Ticket", txtColor: "offWhite", btnColor: "azulEscuro")
+                    boraiBtn(textBtn: "Baixar Ticket", txtColor: .offWhite, btnColor: .azulEscuro)
                 }
             }
             .padding()

@@ -51,7 +51,7 @@ struct BuscarPassagem: View {
             HStack(alignment: .center){
                 Spacer()
                 NavigationLink(destination: VoosIda(), label: {
-                    boraiBtn(textBtn: "Buscar Voo", txtColor: "offWhite", btnColor: "azulEscuro")
+                    boraiBtn(textBtn: "Buscar Passagens")
                 })
                 Spacer()
             }

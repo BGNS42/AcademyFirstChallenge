@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct boraiBtn: View {
-    let textBtn: String
-    let txtColor: String
-    let btnColor: String
+    var textBtn: String = "Texto"
+    var txtColor: Color = .white
+    var btnColor: Color = .azulEscuro
     
     var body: some View {
     
@@ -34,5 +34,5 @@ struct boraiBtn: View {
 
 
 #Preview {
-    boraiBtn(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro",)
+    boraiBtn()
 }
