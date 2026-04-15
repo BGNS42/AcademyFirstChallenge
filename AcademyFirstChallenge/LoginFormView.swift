@@ -15,56 +15,65 @@ struct LoginFormView: View {
     @Binding var showingAlert: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            headerSection
-            
-            VStack(alignment: .leading){
-                Text("Faça o login")
-                    .font(.custom("Poppins-SemiBold", size: 24))
-                    .padding(.bottom, 30)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
+        ZStack{
+            LinearGradient(
+                colors: [Color("gradientTop"), Color("gradientBottom")],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            VStack(alignment: .leading, spacing: 15) {
+                headerSection
+                
+                VStack(alignment: .leading){
+                    Text("Faça o login")
+                        .font(.custom("Poppins-SemiBold", size: 24))
+                        .padding(.bottom, 30)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
                     //.font(.title)
-                
-                // USERNAME FIELD
-                emailField
-                
-                // PASSWORD FIELD
-                passwordField
-                
-                // ESQUECI MINHA SENHA
-                forgetPasswordButton
-                
-                LoginButtons(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro") {
-                    print("Tentando logar...")
-                    if senha == "" && email == "" {
-                        isLoggedIn = true
-                        print("Logado com sucesso!")
-                    } else {
-                        print("Dados incorretos")
-                        showingAlert = true
+                    
+                    // USERNAME FIELD
+                    emailField
+                    
+                    // PASSWORD FIELD
+                    passwordField
+                    
+                    // ESQUECI MINHA SENHA
+                    forgetPasswordButton
+                    
+                    LoginButtons(textBtn: "Entrar", txtColor: "offWhite", btnColor: "azulEscuro") {
+                        print("Tentando logar...")
+                        if senha == "" && email == "" {
+                            isLoggedIn = true
+                            print("Logado com sucesso!")
+                        } else {
+                            print("Dados incorretos")
+                            showingAlert = true
+                        }
                     }
+                    .alert("Dados Inválidos", isPresented: $showingAlert) {
+                        Button("Ok", role: .cancel) {}
+                    } message: {
+                        Text("Dados de login inválidos, tente não preencher nada e tentar novamente.")
+                    }
+                    
+                    socialButtons
+                    
                 }
-                .alert("Dados Inválidos", isPresented: $showingAlert) {
-                    Button("Ok", role: .cancel) {}
-                } message: {
-                    Text("Dados de login inválidos, tente não preencher nada e tentar novamente.")
+                .padding(30)
+                .padding(.bottom, 20)
+                .background{
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(.white)
                 }
                 
-                socialButtons
-                
+                //Spacer()
             }
-            .padding(30)
-            .padding(.bottom, 20)
-            .background{
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(.white)
-            }
-            
-            Spacer()
         }
         .padding()
         .background(Gradient(colors:gradientColors))
+        .ignoresSafeArea()
     }
 }
 
