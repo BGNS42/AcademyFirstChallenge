@@ -14,28 +14,47 @@ struct BuscarPassagem: View {
     @State private var returnDate = Date()
     @State private var tripType = ""
     @State private var passengers = 1
-    @State private var showSuggestions: Bool = false
+    //@State private var showSuggestions: Bool = false
+    
+    @State private var mostrarNotificacao = false
     
     let destinationOptions: [String] = ["Rio de Janeiro, SDU", "São Paulo, GRU"]
     let assentosOptions: [String] = ["Econômica", "Executiva"]
     
     var body: some View {
-        VStack {
+        ZStack{
+            LinearGradient(
+                colors: [Color("gradientTop"), Color("gradientBottom")],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
             
-            headerSection(pageTitle: "Comprar Passagem", pageIcon: "buyTicketImg")
-            
-            Spacer()
-            ScrollView{
-                formBuscaVoo
+            VStack {
+                
+                headerSection(pageTitle: "Comprar Passagem", pageIcon: "buyTicketImg", mostrarNotificacao: $mostrarNotificacao)
+                
                 
                 Spacer()
-                
-                cardCupom
-                
+                ScrollView{
+                    formBuscaVoo
+                    
+                    Spacer()
+                    
+                    cardCupom
+                    
+                }
+            }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Gradient(colors: gradientColors))
+            
+            if mostrarNotificacao {
+                notificacaoView(mostrarNotificacao: $mostrarNotificacao)
+                    .transition(.scale)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Gradient(colors: gradientColors))
     }
     
     var formBuscaVoo: some View {

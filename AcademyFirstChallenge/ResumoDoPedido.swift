@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ResumoDoPedido: View {
+    @State private var mostrarNotificacao = false
+    
     var body: some View {
         VStack{
             
-            headerSection(pageTitle: "Resumo do pedido", pageIcon: "")
+            headerSection(pageTitle: "Resumo do pedido", pageIcon: "", mostrarNotificacao: $mostrarNotificacao)
             
             ScrollView{
                 ZStack(alignment: .center){

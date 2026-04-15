@@ -12,7 +12,7 @@ let gradientColors: [Color] = [
     .gradientBottom
 ]
 
-struct ContentView: View {
+struct ContentView: View {   
     var body: some View {
         TabView {
             HomePageNav()

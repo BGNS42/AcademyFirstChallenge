@@ -25,7 +25,6 @@ struct InfoPagamento: View {
                     
                     header
                     
-                    
                     cardView
                     
                     camposPagamento
