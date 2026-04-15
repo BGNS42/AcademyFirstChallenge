@@ -164,7 +164,7 @@ struct EscolherBagagem: View {
         .background(Color.white)
         .cornerRadius(25)
         .shadow(radius: 6)
-        .scaleEffect(selecionado == index ? 1 : 0.95)
+        //.scaleEffect(selecionado == index ? 1 : 0.95)
         .animation(.easeInOut, value: selecionado)
         .onTapGesture {
             selecionado = index

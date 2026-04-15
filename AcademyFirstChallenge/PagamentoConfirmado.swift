@@ -13,7 +13,7 @@ struct PagamentoConfirmado: View {
     var body: some View {
         VStack{
             if isConcluded {
-                HomePageNav()
+                MeusVoos()
             } else {
                 finale
             }
@@ -23,12 +23,46 @@ struct PagamentoConfirmado: View {
     
     @ViewBuilder
     var finale: some View {
-        Text("Seu pagamento foi concluído!")
-        LoginButtons(textBtn: "Voltar para Home", txtColor: "googleWhite", btnColor: "azulEscuro") {
-            isConcluded = true
+        VStack(spacing: 8){
+            Spacer()
+            ZStack{
+                Image("logoPagamento")
+                    .resizable()
+                    .frame(width: 200, height: 200)
+            }
+            .padding()
+                
+                Text("Pagamento Aprovado!")
+                    .font(.custom("Poppins-SemiBold", size: 28))
+                
+                Text("Obrigado por comprar conosco! Boraí?")
+                    .font(.custom("Poppins-Medium", size: 16))
+                    .foregroundColor(.gray)
+            
+            VStack{
+
+                Button {
+                    isConcluded = true }
+                label: {
+                    boraiBtn(textBtn: "Meus Voos", txtColor: .offWhite, btnColor: .azulEscuro)
+                }
+                .padding(.horizontal)
+
+                    
+                }
+            .padding(30)
+            
+            Spacer()
+                
+                
+        
+        
+                
+            }
+        .padding()
         }
     }
-}
+
 
 #Preview {
     PagamentoConfirmado()
