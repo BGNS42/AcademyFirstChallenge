@@ -8,15 +8,31 @@
 import SwiftUI
 
 struct HomePage: View {
+    @State private var mostrarNotificacao = false
+    
     var body: some View {
-        VStack {
-            headerSection
+        ZStack{
+            LinearGradient(
+                colors: [Color("gradientTop"), Color("gradientBottom")],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
             
-            servicesOptions
+            VStack {
+                headerSection
+                
+                servicesOptions
+                
+                carrosselPromo
+            }
+            .background(Color("offWhite"))
             
-            carrosselPromo
+            if mostrarNotificacao {
+                notificacaoView(mostrarNotificacao: $mostrarNotificacao)
+                    .transition(.scale)
+            }
         }
-        .background(Color("offWhite"))
     }
 }
 
@@ -34,9 +50,10 @@ private extension HomePage {
             
             VStack{
                 HStack(alignment: .center){
-                    Spacer()
+                    //Spacer()
                     Image(systemName: "bell.fill")
                         .frame(alignment: .trailing)
+                        .font(.title3)
                         .opacity(0)
                     
                     Spacer()
@@ -48,15 +65,22 @@ private extension HomePage {
                     
                     Spacer()
                     
-                    Image(systemName: "bell.fill")
-                        .frame(alignment: .trailing)
-                        .foregroundColor(Color("offWhite"))
+                    Button {
+                        withAnimation {
+                            mostrarNotificacao.toggle()
+                        }
+                    } label: {
+                        Image(systemName: "bell.fill")
+                            .foregroundColor(.white)
+                            .font(.title3)
+                    }
                     
-                    Spacer()
+                    //Spacer()
                         
                 }
                 .padding()
                 .padding(.bottom, 30)
+                .padding(.horizontal, 10)
                 
                 Text("Aqui você encontra as\nmelhores ofertas para viajar")
                     .multilineTextAlignment(.center)
@@ -82,6 +106,7 @@ private extension HomePage {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea()
         //.padding(.bottom)
+        
     }
     
     var servicesOptions: some View {

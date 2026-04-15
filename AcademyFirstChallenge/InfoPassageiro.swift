@@ -73,6 +73,7 @@ struct InfoPassageiro: View {
                 HStack {
                     Image(systemName: "arrow.left")
                         .foregroundColor(.white)
+                        .font(.title3)
                         .opacity(0)
                     
                     Spacer()
@@ -93,10 +94,11 @@ struct InfoPassageiro: View {
                     } label: {
                         Image(systemName: "bell.fill")
                             .foregroundColor(.white)
+                            .font(.title3)
                     }
                 }
                 .padding(.horizontal)
-                .padding(.top, -50)
+                .padding(.top, -30)
                 
                 
             }

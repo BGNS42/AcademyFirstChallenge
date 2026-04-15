@@ -84,6 +84,7 @@ struct EscolherBagagem: View {
             HStack {
                 Image(systemName: "arrow.left")
                     .foregroundColor(.white)
+                    .font(.title3)
                     .opacity(0)
                 
                 Spacer()
@@ -103,10 +104,11 @@ struct EscolherBagagem: View {
                 } label: {
                     Image(systemName: "bell.fill")
                         .foregroundColor(.white)
+                        .font(.title3)
                 }
             }
             .padding(.horizontal)
-            .padding(.top, -60)
+            .padding(.top, -30)
             }
         } //var header
     

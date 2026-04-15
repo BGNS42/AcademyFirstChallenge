@@ -14,14 +14,29 @@ struct VoosIda: View {
     @State var aeroBuscaVolta: String = "SDU"
     //@State var destino: String
     
+    @State private var mostrarNotificacao = false
+    
     var body: some View {
-        VStack{
-            headerSection
+        ZStack{
+            LinearGradient(
+                colors: [Color("gradientTop"), Color("gradientBottom")],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            VStack{
+                headerSection
+                
+                voosScrollView
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Gradient(colors: gradientColors))
             
-            voosScrollView
+            if mostrarNotificacao {
+                notificacaoView(mostrarNotificacao: $mostrarNotificacao)
+                    .transition(.scale)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Gradient(colors: gradientColors))
     }
     
     var headerSection: some View {
@@ -44,9 +59,15 @@ struct VoosIda: View {
                 
                 Spacer()
                 
-                Image(systemName: "bell.fill")
-                    .foregroundStyle(Color.offWhite)
-                    .font(.title3)
+                Button {
+                    withAnimation {
+                        mostrarNotificacao.toggle()
+                    }
+                } label: {
+                    Image(systemName: "bell.fill")
+                        .foregroundColor(.white)
+                        .font(.title3)
+                }
             }
             .padding()
             
@@ -65,7 +86,7 @@ struct VoosIda: View {
             .padding(.horizontal, 20)
         }
         .padding(.horizontal)
-        .padding(.top, -60)  // PADDING PRA POSICIONAR HEADER NA MESMA LINHA DO BOTAO DE VOLTAR
+        .padding(.top, -30)  // PADDING PRA POSICIONAR HEADER NA MESMA LINHA DO BOTAO DE VOLTAR
     }
     
     var voosScrollView: some View {

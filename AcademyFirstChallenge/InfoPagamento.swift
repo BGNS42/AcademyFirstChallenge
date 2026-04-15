@@ -52,6 +52,7 @@ struct InfoPagamento: View {
                 HStack {
                     Image(systemName: "arrow.left")
                         .foregroundColor(.white)
+                        .font(.title3)
                         .opacity(0)
                     
                     Spacer()
@@ -72,10 +73,11 @@ struct InfoPagamento: View {
                     } label: {
                         Image(systemName: "bell.fill")
                             .foregroundColor(.black)
+                            .font(.title3)
                     }
                 }
                 .padding(.horizontal)
-                .padding(.top, -60)
+                .padding(.top, -30)
                 
                 
             }

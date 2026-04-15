@@ -15,8 +15,8 @@ struct MeusVoos: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0){
-                
                 header
+                //Spacer()
                ticketCard
                 Spacer()
                 
@@ -39,6 +39,7 @@ struct MeusVoos: View {
                 label: {
                     Image(systemName: "arrow.left")
                         .foregroundStyle(Color.white)
+                        .font(.title3)
                         .opacity(0)
                         
                 }
@@ -62,6 +63,7 @@ struct MeusVoos: View {
                 } label: {
                     Image(systemName: "bell.fill")
                         .foregroundColor(.white)
+                        .font(.title3)
                 }
             }
             .padding(.horizontal)
