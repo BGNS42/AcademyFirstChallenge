@@ -18,6 +18,7 @@ struct PagamentoConfirmado: View {
                 finale
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     @ViewBuilder
